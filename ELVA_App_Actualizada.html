@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ELVA - Apoyo Escolar</title>
+
+  <style>
+    body{
+      margin:0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg,#0d47a1,#42a5f5);
+      color:white;
+    }
+
+    header{
+      text-align:center;
+      padding:30px;
+    }
+
+    header h1{
+      font-size:60px;
+      margin:0;
+    }
+
+    header p{
+      font-size:20px;
+    }
+
+    .frase{
+      margin-top:15px;
+      font-size:18px;
+      font-style:italic;
+      color:#e3f2fd;
+    }
+
+    .contenedor{
+      width:90%;
+      max-width:800px;
+      margin:auto;
+      background:white;
+      color:#333;
+      padding:25px;
+      border-radius:20px;
+      margin-bottom:30px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    h2{
+      color:#1565c0;
+      text-align:center;
+    }
+
+    input, textarea{
+      width:100%;
+      padding:12px;
+      margin-top:8px;
+      margin-bottom:15px;
+      border-radius:10px;
+      border:1px solid #90caf9;
+    }
+
+    button{
+      width:100%;
+      padding:14px;
+      border:none;
+      border-radius:10px;
+      background:#1565c0;
+      color:white;
+      font-size:17px;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    button:hover{
+      background:#0d47a1;
+    }
+
+    .card{
+      background:#e3f2fd;
+      padding:15px;
+      border-radius:15px;
+      margin-top:15px;
+    }
+
+    ul{
+      padding-left:20px;
+    }
+
+    footer{
+      text-align:center;
+      padding:20px;
+      color:white;
+    }
+
+    .archivo{
+      background:#f5f9ff;
+      padding:20px;
+      border-radius:15px;
+      text-align:center;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ELVA</h1>
+  <p>Aplicación inteligente contra el rezago escolar</p>
+
+  <div class="frase">
+    ✨ "El éxito empieza con pequeños esfuerzos repetidos cada día."
+  </div>
+</header>
+
+<div class="contenedor">
+
+  <h2>🎯 Metas Escolares</h2>
+
+  <input type="text" id="meta" placeholder="Escribe una meta...">
+  <button onclick="agregarMeta()">Agregar Meta</button>
+
+  <div class="card">
+    <ul id="listaMetas"></ul>
+  </div>
+
+</div>
+
+<div class="contenedor">
+
+  <h2>⏰ Recordatorio de Tareas</h2>
+
+  <input type="text" id="tarea" placeholder="Escribe una tarea...">
+  <button onclick="guardarTarea()">Guardar Tarea</button>
+
+  <div class="card">
+    <ul id="listaTareas"></ul>
+  </div>
+
+</div>
+
+<div class="contenedor">
+
+  <h2>📚 Generador de Resúmenes</h2>
+
+  <textarea id="texto" rows="6" placeholder="Pega información o apuntes aquí..."></textarea>
+
+  <button onclick="generarResumen()">Generar Resumen</button>
+
+  <div class="card">
+    <p id="resultado"></p>
+  </div>
+
+</div>
+
+<div class="contenedor">
+
+  <h2>📂 Subir Tareas</h2>
+
+  <div class="archivo">
+
+    <p>Sube aquí tus tareas o proyectos escolares.</p>
+
+    <input type="file" id="archivoTarea">
+
+    <button onclick="subirArchivo()">Subir Archivo</button>
+
+    <p id="mensajeArchivo"></p>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 ELVA | Educación para todos
+</footer>
+
+<script>
+
+  function agregarMeta(){
+    let meta = document.getElementById("meta").value;
+
+    if(meta !== ""){
+      let li = document.createElement("li");
+      li.textContent = "✅ " + meta;
+
+      document.getElementById("listaMetas").appendChild(li);
+
+      document.getElementById("meta").value = "";
+    }
+  }
+
+  function guardarTarea(){
+    let tarea = document.getElementById("tarea").value;
+
+    if(tarea !== ""){
+      let li = document.createElement("li");
+      li.textContent = "📌 " + tarea;
+
+      document.getElementById("listaTareas").appendChild(li);
+
+      alert("🔔 Recordatorio guardado");
+
+      document.getElementById("tarea").value = "";
+    }
+  }
+
+  function generarResumen(){
+
+    let texto = document.getElementById("texto").value;
+
+    if(texto.length > 0){
+
+      let resumen = texto.split(".").slice(0,2).join(".") + ".";
+
+      document.getElementById("resultado").innerHTML =
+      "📝 Resumen automático:<br><br>" + resumen;
+    }
+  }
+
+  function subirArchivo(){
+
+    let archivo = document.getElementById("archivoTarea").files[0];
+
+    if(archivo){
+      document.getElementById("mensajeArchivo").innerHTML =
+      "✅ Archivo subido: " + archivo.name;
+    } else {
+      document.getElementById("mensajeArchivo").innerHTML =
+      "⚠️ Selecciona un archivo primero.";
+    }
+  }
+
+</script>
+
+</body>
+</html>
